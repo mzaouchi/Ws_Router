@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import ListUsers from './Components/ListUsers';
+import NavUser from './Components/NavUser';
+import { Route, Routes } from 'react-router-dom';
+import Home from './Components/Home';
+import Contact from './Components/Contact';
+import Profil from './Components/Profil';
 
 function App() {
+  const [users,setUsers] = useState([
+    {name : "Mohamed", age : 31, id : Math.random()},
+    {name : "Aziz", age : 18, id : Math.random()},
+    {name : "Brahim", age : 28, id : Math.random()}
+  ])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/* <h1>Workshop Router</h1>
+      <ListUsers users={users}/> */}
+
+      <NavUser/>
+
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/brahim' element={<ListUsers users={users}/>}/>
+        <Route path='/Contact' element={<Contact/>}/>
+        <Route path='/profil/:id' element={<Profil users={users}/>}/>
+      </Routes>
+
+      
+
     </div>
   );
 }
